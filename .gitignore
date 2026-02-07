@@ -1,0 +1,4 @@
+# Secrets and Config
+config.env
+.env
+*.local
