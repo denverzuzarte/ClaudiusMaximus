@@ -1,0 +1,250 @@
+.app {
+  min-height: 100vh;
+  background-color: #f8f9fb;
+}
+
+/* Top Navigation Bar */
+.header {
+  background-color: #1a2332;
+  border-bottom: 1px solid #2d3748;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.logo {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  font-family: monospace;
+}
+
+.header-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #a0aec0;
+}
+
+/* Context Strip */
+.context-strip {
+  background-color: #f3f4f6;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.context-strip-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.context-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.context-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.context-value {
+  font-size: 12px;
+  font-weight: 500;
+  color: #1a2332;
+  font-family: 'Courier New', monospace;
+}
+
+.context-value.status-enforced {
+  color: #047857;
+  font-weight: 700;
+}
+
+.context-divider {
+  width: 1px;
+  height: 16px;
+  background-color: #d1d5db;
+}
+
+/* Main Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 32px;
+}
+
+/* Guidance Section */
+.guidance-section {
+  margin-bottom: 32px;
+  padding: 16px 20px;
+  background-color: #fafbfc;
+  border: 1px solid #e5e7eb;
+  border-left: 3px solid #6b7280;
+}
+
+.guidance-text {
+  font-size: 13px;
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Input Section */
+.input-section {
+  background: #ffffff;
+  border: 2px solid #d1d5db;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.input-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 12px;
+}
+
+.input-row {
+  display: flex;
+  gap: 12px;
+}
+
+.input-field {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #1a2332;
+  border: 2px solid #9ca3af;
+  background-color: #fafbfc;
+  outline: none;
+  transition: border-color 0.15s, background-color 0.15s;
+  font-family: inherit;
+}
+
+.input-field:focus {
+  border-color: #374151;
+  background-color: #ffffff;
+}
+
+.input-field:disabled {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.run-button {
+  padding: 10px 28px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #1a2332;
+  border: 2px solid #1a2332;
+  cursor: pointer;
+  transition: background-color 0.15s;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.run-button:hover {
+  background-color: #2d3748;
+}
+
+.run-button:active {
+  background-color: #0f172a;
+}
+
+.disclaimer-text {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #6b7280;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Execution Flow */
+.execution-flow {
+  background: #ffffff;
+  border: 2px solid #d1d5db;
+}
+
+.flow-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #fafbfc;
+}
+
+.flow-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a2332;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.flow-timestamp {
+  font-size: 12px;
+  font-weight: 400;
+  color: #6b7280;
+  font-family: 'Courier New', monospace;
+}
+
+.stages-container {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 24px 16px;
+  }
+  
+  .header-content {
+    padding: 0 16px;
+  }
+  
+  .context-strip-content {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+  }
+  
+  .input-row {
+    flex-direction: column;
+  }
+  
+  .flow-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+

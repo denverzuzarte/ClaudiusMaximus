@@ -1,0 +1,282 @@
+/* Base Stage Card */
+.stage-card {
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #ffffff;
+}
+
+.stage-card:last-child {
+  border-bottom: none;
+}
+
+.stage-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  background-color: #fafbfc;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.stage-number {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  letter-spacing: 0.5px;
+  font-family: monospace;
+}
+
+.stage-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a2332;
+  letter-spacing: 0.3px;
+}
+
+.stage-content {
+  padding: 20px 24px;
+}
+
+.payload {
+  font-size: 14px;
+  color: #374151;
+}
+
+/* USER_INPUT styling */
+.stage-card.user_input .stage-header {
+  background-color: #ffffff;
+}
+
+.user-input-text {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a2332;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* REASONING styling */
+.stage-card.reasoning .stage-header {
+  background-color: #fafbfc;
+}
+
+.stage-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.reasoning-text {
+  font-size: 13px;
+  color: #4b5563;
+  margin: 0;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* PLAN styling */
+.plan-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.plan-steps li {
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  background-color: #f9fafb;
+  border-left: 2px solid #d1d5db;
+  font-size: 13px;
+  color: #374151;
+}
+
+.plan-steps li:last-child {
+  margin-bottom: 0;
+}
+
+/* INTENT_TOKEN styling */
+.intent-badge {
+  display: inline-block;
+  background-color: #3b82f6;
+  color: #ffffff;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+
+.intent-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.intent-table tbody tr {
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.intent-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.intent-table td {
+  padding: 10px 12px;
+}
+
+.intent-table td.label {
+  font-weight: 600;
+  color: #6b7280;
+  width: 140px;
+}
+
+.intent-table td.value {
+  color: #1a2332;
+  font-weight: 500;
+  font-family: 'Courier New', monospace;
+}
+
+/* POLICY_EVALUATION styling */
+.policy-badge {
+  display: inline-block;
+  background-color: #f59e0b;
+  color: #000000;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+
+.checks-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  border: 1px solid #e5e7eb;
+}
+
+.checks-table thead {
+  background-color: #f9fafb;
+}
+
+.checks-table th {
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #4b5563;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.checks-table tbody tr {
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.checks-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.checks-table td {
+  padding: 12px;
+  vertical-align: middle;
+}
+
+.check-rule {
+  font-weight: 600;
+  color: #1a2332;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+}
+
+.check-result {
+  text-align: center;
+}
+
+.result-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.result-badge.pass {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.result-badge.fail {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.check-details {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* MCP_OUTCOME styling */
+.outcome-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 2px solid;
+}
+
+.outcome-status.blocked {
+  background-color: #fef2f2;
+  border-color: #b91c1c;
+}
+
+.outcome-status.executed {
+  background-color: #f0fdf4;
+  border-color: #047857;
+}
+
+.outcome-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #6b7280;
+}
+
+.outcome-value {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.outcome-status.blocked .outcome-value {
+  color: #b91c1c;
+}
+
+.outcome-status.executed .outcome-value {
+  color: #047857;
+}
+
+.outcome-reason {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  background-color: #fafbfc;
+  border: 1px solid #e5e7eb;
+  font-size: 13px;
+}
+
+.outcome-reason .label {
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.outcome-reason .value {
+  color: #1a2332;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+}
