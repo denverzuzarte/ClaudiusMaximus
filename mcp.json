@@ -2,7 +2,7 @@
   "mcpServers": {
     "travel-muscle": {
       "command": "python3",
-      "args": ["executosr/server.py"],
+      "args": ["executor/server.py"],
       "env": {
         "ARMOR_IQ_SECRET": "hackathon-secret-key-2026",
         "PYTHONUNBUFFERED": "1"

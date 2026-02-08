@@ -188,6 +188,23 @@
   line-height: 1.5;
 }
 
+.error-text {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #dc2626;
+  font-weight: 500;
+  padding: 8px 12px;
+  background-color: #fef2f2;
+  border-left: 3px solid #dc2626;
+}
+
+.run-button:disabled {
+  background-color: #9ca3af;
+  border-color: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 /* Execution Flow */
 .execution-flow {
   background: #ffffff;
@@ -209,6 +226,22 @@
   color: #1a2332;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+.flow-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.execution-id {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  font-family: 'Courier New', monospace;
+  padding: 4px 8px;
+  background-color: #f3f4f6;
+  border: 1px solid #e5e7eb;
 }
 
 .flow-timestamp {

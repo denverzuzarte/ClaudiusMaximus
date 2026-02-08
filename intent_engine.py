@@ -3,9 +3,15 @@ import re
 import json
 from google import genai
 from google.genai import types
+from dotenv import load_dotenv
 
+# Load environment variables from .env file in parent directory
+env_path = os.path.join(os.path.dirname(__file__), '.env')
+load_dotenv(env_path)
 
-os.environ["GEMINI_API_KEY"] = "AIzaSyCothUQQQB490MmC5QdA-eVod24YZ8gGC8"
+# Set GEMINI_API_KEY from GOOGLE_API_KEY for compatibility
+if os.getenv('GOOGLE_API_KEY'):
+    os.environ['GEMINI_API_KEY'] = os.getenv('GOOGLE_API_KEY')
 
 
 class IntentEngine:
@@ -16,8 +22,8 @@ class IntentEngine:
     # Define action types and their MANDATORY parameters with estimated budgets
     ACTION_SCHEMAS = {
         "BOOK_FLIGHT": {
-            "required": ["origin", "destination", "date", "time", "website", "price"],
-            "optional": ["airline", "class", "flight_number"],
+            "required": ["origin", "destination", "date", "website", "price"],
+            "optional": ["airline", "class", "flight_number", "time"],
             "budget_range": {"low": 100, "medium": 300, "high": 800, "currency": "USD"}
         },
         "BOOK_TRAIN": {
@@ -27,7 +33,7 @@ class IntentEngine:
         },
         "BOOK_HOTEL": {
             "required": ["hotel_name", "location", "check_in", "check_out", "website", "price"],
-            "optional": ["room_type", "rating", "amenities"],
+            "optional": ["room_type", "rating", "amenities", "guests"],
             "budget_range": {"low": 50, "medium": 150, "high": 400, "currency": "USD per night"}
         },
         "BOOK_RESTAURANT": {

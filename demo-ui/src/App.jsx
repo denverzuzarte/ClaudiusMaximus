@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import StageCard from './components/StageCard';
+import QuestionnaireModal from './components/QuestionnaireModal';
 import './App.css';
 
 const executionTrace = {
@@ -61,15 +62,99 @@ function App() {
   const [inputValue, setInputValue] = useState('Pay my electricity bill');
   const [showExecution, setShowExecution] = useState(false);
   const [visibleStages, setVisibleStages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [executionId, setExecutionId] = useState(null);
+  const [showQuestionnaire, setShowQuestionnaire] = useState(false);
+  const [questions, setQuestions] = useState([]);
+  const [originalRequest, setOriginalRequest] = useState('');
 
-  const handleRun = () => {
+  const handleRun = async () => {
     setShowExecution(true);
-    setVisibleStages(executionTrace.stages);
+    setLoading(true);
+    setError(null);
+    setVisibleStages([]);
+    setOriginalRequest(inputValue);
+    
+    try {
+      // Call the backend API with intent processing
+      const response = await fetch('http://localhost:5001/api/execute-with-intent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text: inputValue
+        })
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to execute request');
+      }
+      
+      const data = await response.json();
+      
+      // Check if we need to ask questions
+      if (data.needs_questions) {
+        setQuestions(data.questions);
+        setShowQuestionnaire(true);
+        setLoading(false);
+      } else {
+        // Direct execution (questions already answered)
+        setExecutionId(data.execution_id);
+        setVisibleStages(data.stages);
+        setLoading(false);
+      }
+    } catch (err) {
+      console.error('API Error:', err);
+      // Fallback to mock data if API fails
+      setError('Using mock data (API unavailable)');
+      setVisibleStages(executionTrace.stages);
+      setLoading(false);
+    }
+  };
+
+  const handleQuestionnaireSubmit = async (answers) => {
+    setShowQuestionnaire(false);
+    setLoading(true);
+    
+    try {
+      // Answers already formatted by QuestionnaireModal with id, answer, field, etc.
+      // No need to reformat - just pass them through
+      
+      // Call API with user responses
+      const response = await fetch('http://localhost:5001/api/execute-with-intent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text: originalRequest,
+          responses: answers  // Pass answers directly without reformatting
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to execute request');
+      }
+      
+      setExecutionId(data.execution_id);
+      setVisibleStages(data.stages);
+    } catch (err) {
+      console.error('API Error:', err);
+      setError(err.message || 'Failed to process answers');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleReset = () => {
     setShowExecution(false);
     setVisibleStages([]);
+    setError(null);
+    setExecutionId(null);
   };
 
   return (
@@ -120,25 +205,36 @@ function App() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Enter transaction request"
-              disabled={showExecution}
+              disabled={showExecution || loading}
             />
             <button 
               className="run-button" 
               onClick={showExecution ? handleReset : handleRun}
+              disabled={loading}
             >
-              {showExecution ? 'Reset Session' : 'Propose Execution'}
+              {loading ? 'Processing...' : (showExecution ? 'Reset Session' : 'Propose Execution')}
             </button>
           </div>
           <p className="disclaimer-text">
             All requests are subject to policy enforcement. Execution is not guaranteed.
           </p>
+          {error && (
+            <p className="error-text">
+              {error}
+            </p>
+          )}
         </div>
 
         {showExecution && (
           <div className="execution-flow">
             <div className="flow-header">
               <div className="flow-title">Execution Log</div>
-              <div className="flow-timestamp">{new Date().toISOString().replace('T', ' ').substring(0, 19)} UTC</div>
+              <div className="flow-meta">
+                {executionId && (
+                  <span className="execution-id">ID: {executionId}</span>
+                )}
+                <div className="flow-timestamp">{new Date().toISOString().replace('T', ' ').substring(0, 19)} UTC</div>
+              </div>
             </div>
             
             <div className="stages-container">
@@ -149,6 +245,18 @@ function App() {
           </div>
         )}
       </div>
+
+      {showQuestionnaire && (
+        <QuestionnaireModal
+          questions={questions}
+          onSubmit={handleQuestionnaireSubmit}
+          onClose={() => {
+            setShowQuestionnaire(false);
+            setShowExecution(false);
+            setLoading(false);
+          }}
+        />
+      )}
     </div>
   );
 }
